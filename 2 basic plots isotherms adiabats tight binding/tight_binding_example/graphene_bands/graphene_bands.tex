@@ -1,0 +1,275 @@
+% Chem 719/749 Fall 2010 Problem Sets: PS 2
+
+\documentclass[11pt]{article}
+
+%\usepackage{overcite}
+\usepackage{graphicx}
+\usepackage{times}
+
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0.0in}
+\setlength{\headheight}{0.0in}
+\setlength{\headsep}{0.0in}
+\setlength{\textheight}{9.0in}
+\setlength{\oddsidemargin}{0.0in}
+
+\begin{document}
+
+\thispagestyle{empty}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\let\oldhat\hat
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\renewcommand{\hat}[1]{\oldhat{\mathbf{#1}}}
+
+\begin{minipage}[t]{5.0in}
+\begin{center}
+%
+{\bfseries
+University of South Carolina \\
+Department of Chemistry \\
+\vspace{1.0em} CHEM 749 Spring 2020: \\ 
+Chemistry and Physics of Low-Dimensional Materials \\
+Andrew Greytak \\
+\vspace{1.5em}\Large{Supplement to Lecture 6: \\ Graphene and Carbon Nanotube Band Structure from Tight Binding}}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{1.0in}
+\raisebox{0.0em}{\raisebox{-\height}{
+\includegraphics[width=\textwidth]{USC_Stan_Pos_202_logo_only_clear_bkgd.png}
+}}\\
+\vfill
+\end{minipage}
+
+\setcounter{page}{1}
+% \renewcommand{\baselinestretch}{1.5} \small\normalsize
+\renewcommand{\labelenumi}{\bfseries\arabic{section}\alph{enumi}.}
+
+
+\vspace{1.0em}
+\noindent\hrulefill
+
+\section*{Tight-binding result}
+
+The tight-binding calculation of the graphene band structure (see
+Wallace 1947 \cite{wallace_band_1947}, Saito et al. 1992 \cite{saito_electronic_1992}, Castro Neto et al. 2009 \cite{castro_neto_electronic_2009}) is more complicated than that for our
+1-D $s$-orbital chain both because it's in two dimensions, and because
+there are two atoms per unit cell (two atoms per Bravais lattice site). This two-atom {\em basis} means there are effectively two hexagonal lattices formed by two sets of atoms $A$ and $B$. Bloch wavefunctions $\psi_A$ and $\psi_B$ describe states formed from the $p_z$ orbitals on atoms in lattices $A$ and $B$ ($\phi_A$ and $\phi_B$), but the actual band states are linear combinations of these:
+\begin{eqnarray}
+\psi_{A,k} = \sum_A e^{i \vec{k} \cdot \vec{R}_A} \phi_A(\vec{r}-\vec{R}_A) \\
+\psi_{B,k} = \sum_B e^{i \vec{k} \cdot \vec{R}_B} \phi_B(\vec{r}-\vec{R}_B) \\
+\Psi_k = c_{A,k} \psi_{A,k} + c_{B,k} \psi_{B,k} 
+\end{eqnarray}
+and we want to find coefficients $c_{i,k}$ such that
+\begin{equation}
+\vec{H} \Psi_k = E_k \Psi_k
+\end{equation}
+ To find the band energies $E_k$ according to the variational principle, we must solve the following ``secular determinant'':
+\begin{equation}
+\left| \begin{array}{ll} H_{AA} - E \, S_{AA} & H_{AB} - E\,  S_{AB} \\
+	 H_{BA} - E\,  S_{BA} & H_{BB} - E \, S_{BB} \end{array} \right| = 0
+\end{equation}
+Where $H_{ij}$ and $S_{ij}$ represent the interaction and overlap integrals between each basis Bloch function. We require that $H_{AB}=H_{BA}^*$ and $S_{AB}=S_{BA}^*$. The problem is greatly simplified for graphene by noting that all of the atomic orbitals are the same so $H_{AA} = H_{BB} = H_{11}$. We can further simplify by neglecting overlap ($S_{AA}=S_{BB} = 1$ and $S_{AB}=0$). As described by Wallace, the nearest-neighbor correction to the atomic orbital energies then becomes:
+\begin{eqnarray}
+E_{\mathrm{2D}} & = & H_{11} \pm H_{12}  \label{e2d} \\
+H_{11} & = & E_\circ -  \gamma_\circ^\prime \sum_{A,A = \mathrm{n.n.}} e^{i\vec{k}(\vec{R}_{A^\prime}-\vec{R}_{A})} \\
+H_{BA} & = & \phantom{E_\circ + \ }-\gamma_\circ \sum_{A,B = \mathrm{n.n.}} e^{i\vec{k}(\vec{R}_B-\vec{R}_A)} \\
+H_{12} & = & [H_{BA}H_{BA}^*]^{1/2}
+\end{eqnarray}
+\begin{figure}[h]
+\center\includegraphics[width=4.5in]{graphene_bands_fig1.png}
+\caption{{\small {\em Left:} The graphene lattice. The two groups of
+like atoms are differently shaded. Representative primitive lattice
+vectors and nearest-neighbor vectors are shown. {\em Right:}
+Reciprocal space. The black dots describe reciprocal lattice
+points. The black line marks the extent of the first Brillouin
+zone. The colored circles near the $\vec{K}$ and $\vec{K}^\prime$
+points help to identify regions that describe the same states: Each
+filled red circle describes the same state. The filled and open
+circles of each color describe two sets of states that are linked by
+inversion symmetry. It can be seen that the Brillouin zone includes
+exactly one instance of each of these points, completely describing
+the region surrounding each of the two distinct $\vec{K}$ points.}}
+\label{fig1}
+\end{figure}
+where $H_{11}$ accounts for nearest neighbors within the same Bravais lattice (i.e. two bonds away, and includes an on-site term) and $H_{12}$ accounts for nearest neighbors in different Bravais lattices (i.e. one bond away). In the crudest treatment, $H_{11}$ can be neglected. The $+$ and $-$ in Equation \ref{e2d} refer to the valence and
+conduction bands respectively, and $-\gamma_\circ$ and $-\gamma_\circ^\prime$ are the
+nearest-neighbor interaction integrals (written such that $\gamma_\circ$ and $\gamma_\circ^\prime$ have positive values, which follows the convention used by Wallace and Geim). Inspection of the graphene lattice
+ shows that for a given atom, there are six nearest-neighbor Bravais lattice vectors $\vec{R}_{AA^\prime}$. In what follows, $a$ is the {\bf bond length}, so that $a \sqrt{3}$ is length of a primary lattice vector (the lattice constant). This is the convention of Geim {\em et al.} The $\vec{R}_{AA^\prime}$ are:
+\begin{eqnarray}
+\vec{R}_{A^\prime}-\vec{R}_A & = & \pm \sqrt{3} a\vec{\hat{y}} \\
+\vec{R}_{A^\prime}-\vec{R}_A & = & \pm \frac{3}{2}a\vec{\hat{x}} \mp \frac{\sqrt{3}}{2}a\vec{\hat{y}} \\
+\vec{R}_{A^\prime}-\vec{R}_A & = & \pm \frac{3}{2}a\vec{\hat{x}} \mp \frac{\sqrt{3}}{2}a\vec{\hat{y}} \\
+\end{eqnarray}
+while there are three nearest-neighbor vectors $\vec{R}_{AB}$ between atoms on the two different sites:
+\begin{eqnarray}
+\vec{R}_B-\vec{R}_A & = & a\vec{\hat{x}} \\
+\vec{R}_B-\vec{R}_A & = & -\frac{a}{2}\vec{\hat{x}} + \frac{\sqrt{3}}{2}a\vec{\hat{y}} \\
+\vec{R}_B-\vec{R}_A & = & -\frac{a}{2}\vec{\hat{x}} - \frac{\sqrt{3}}{2}a\vec{\hat{y}} \\
+\end{eqnarray}
+Then,
+\begin{eqnarray}
+H_{11} & = & E_\circ - \gamma_\circ^\prime \left[ 2\cos (k_y \sqrt{3} a) + 4 \cos (k_x \frac{3}{2} a) \cos (k_y \frac{\sqrt{3}}{2} a) \right] \\
+H_{BA} & = & \gamma_\circ \left[ e^{i{k_x a}} + 2 e^{-ik_x a/2} \cos( k_y \frac{\sqrt{3}}{2}a)     \right] \\
+H_{12}  =   \left[ H_{BA}^* H_{BA} \right]^{1/2}  & = & \gamma_\circ \left[ 1 + 4 \cos (k_x \frac{3}{2}a ) \cos (k_y \frac{\sqrt{3}}{2} a) + 4 \cos^2 (k_y \frac{\sqrt{3}}{2}a) \right]^{1/2}
+\label{bands}
+\end{eqnarray}
+It's possible to write these more concisely as
+\begin{eqnarray}
+H_{11} = E_\circ - \gamma_\circ^\prime f(\vec{k}) \\
+H_{12} = - \gamma_\circ \sqrt{3 + f(\vec{k})}
+\end{eqnarray}
+with
+\begin{equation}
+f(\vec{k}) = 2\cos (k_y \sqrt{3} a) + 4 \cos (k_x \frac{3}{2} a) \cos (k_y \frac{\sqrt{3}}{2} a)
+\end{equation}
+Importantly, this works out to $E_\mathrm{2D} = E_\circ \pm 3 \gamma_\circ - 6 \gamma_\circ^\prime$ at
+$\vec{k} = 0$, where the $+$ version represents the upper (conduction) band and the $-$ version the lower (valence band). The bands are degenerate for
+$\vec{k}$'s at the six corners of the Brilloiun zone with $E_\mathrm{2D} = E_\circ + 3 \gamma_\circ^\prime$  (for example, try
+$\vec{k} = \frac{4}{3\sqrt{3}}\frac{\pi}{a}\vec{\hat{y}}$). The Brillouin zone
+contacts six such points, which are typically labeled K. We expect $\gamma_\circ > \gamma_\circ^\prime$ because the AB distances are shorter, and in fact the essential behavior can be understood by considering $\gamma_\circ^\prime = 0$ (ignoring $H_{11}$).
+
+We can plot this band structure as a three-dimensional surface, with
+energy on the vertical scale. The fact that the points of contact
+between the valence and conduction band fall at the edge of the
+Brillouin zone make it tricky to visualize, and count, the regions of
+$\vec{k}$ space that are close to the band edge in this system. It
+will be easiest to see the form of the conical band structure around
+the K points if we use the ``extended zone'' scheme (continuing the
+band structure outside of the zone). This is perfectly fine as long as
+we remember that $\vec{k}$ values separated by a reciprocal lattice
+vector actually describe the same states. Thus there are evidently a
+total of {\em two} distinct points of contact between the bands; these
+points are labeled these $\vec{K}$ and $\vec{K}^\prime$ in Figure
+\ref{fig1}. These are equivalent to each other by inversion symmetry,
+but the regions around each describe different states.
+
+\begin{figure}[t]
+\center\includegraphics[width=5.5in]{graphene_bands_fig2.png}
+\caption{{\small {\em Left:} Top view of the conduction band of
+graphene, plotted with a color scale of energy. The Brillouin zone
+edge is highlighted.  {\em Right:} A 3-D view of energy vs. $k_x$ and
+$k_y$ illustrating the two bands and the conical nature of the contact
+between bands at points $\vec{K}$ and $\vec{K}^\prime$.}}
+\label{graphene}
+\end{figure}
+
+
+\section*{Quantum confinement in single-walled carbon nanotubes}
+
+\begin{figure}[tbh]
+\center\includegraphics[width=\textwidth]{graphene_bands_fig3.png}
+\caption{{\small Allowed $\vec{k}$ vectors for a (5,2) nanotube. Each
+line corresponds to states with constant $q$ and various values of
+$t$; $t$ thus describes the wavevector along the nanotube axis. The
+black dots in the view at left indicate $\vec{k}$ for $t=0$ for
+several representative subbands. As seen at right, each line of
+allowed $\vec{k}$ values describes a valence and conduction
+sub-bands. The thicker segments of the lines indicate portions of each
+subband that fall within the Brillouin zone and thus describe unique
+states. Because the $\vec{K}$ and $\vec{K}^\prime$ points are included
+among the allowed $\vec{k}$ values, this nanotube is expected to be a
+metal.}}
+\label{five_two}
+\end{figure}
+
+Now, we can go about imposing quantum confinement by declaring a
+roll-up vector $\vec{C}_h = n \vec{a}_1 + m \vec{a}_2$ with
+$\vec{a}_1$ and $\vec{a}_2$ primitive (direct) lattice vectors. The
+length of $\vec{C}_h$ is the circumference of the tube; a trip around
+the circumference must comprise an integer number of electron
+wavelengths, or in other words
+\begin{equation}
+\vec{C}_h \cdot \vec{k} = 2\pi q
+\end{equation}
+where $q$ is an integer. In other words, the component of $\vec{k}$ in
+the $\vec{C}_h$ direction must be an integer multiple of $2
+\pi/|\vec{C}_h|$. The component of $\vec{k}$ perpendicular to
+$\vec{C}_h$ could have any value: we will call it $t$.
+\begin{eqnarray}
+\vec{k} & = & \frac{2 \pi q}{|\vec{C}_h|} \vec{\hat{C}}_h + t (\perp\vec{\hat{C}}_h) \\
+\vec{\hat{C}}_h & = & \frac{C_{h,x}}{|\vec{C}_h|} \vec{\hat{x}} + \frac{C_{h,y}}{|\vec{C}_h|} \vec{\hat{y}} \\
+\perp\vec{\hat{C}}_h & = & - \frac{C_{h,y}}{|\vec{C}_h|} \vec{\hat{x}} + \frac{C_{h,x}}{|\vec{C}_h|} \vec{\hat{y}} \\
+\end{eqnarray}
+where we have arbitrarily set $\perp\vec{\hat{C}}_h$ to be rotated to
+the 90$^\circ$ to the left vs. $\vec{\hat{C}}_h$. Now, we have a
+complete description of $\vec{k}$:
+\begin{equation}
+\vec{k}  =  \left(\frac{2 \pi q C_{h,x}}{|\vec{C}_h|^2} - t \frac{C_{h,y}}{|\vec{C}_h|} \right) \vec{\hat{x}} 
+	+ \left(\frac{2 \pi q C_{h,y}}{|\vec{C}_h|^2} + t \frac{C_{h,x}}{|\vec{C}_h|} \right) \vec{\hat{y}}
+\label{k_q_t}
+\end{equation}
+
+Using Equation \ref{k_q_t} we step through integer values of $q$, and
+for each one, we generate a line of $\vec{k}$'s by varying $t$
+continuously. At each $\vec{k}$, Equation \ref{bands} can be used to
+compute the valence and conduction band energy. This is exactly what
+is done to generate Figure \ref{five_two}, using $\vec{a}_1 = (3a/2)
+\vec{\hat{x}} + (a\sqrt{3}/2) \vec{\hat{y}}$ and $\vec{a}_2 = (3a/2)
+\vec{\hat{x}} - ( a\sqrt{3}/2) \vec{\hat{y}}$ as the primitive lattice
+vectors.
+
+
+The values of $t$ and $q$ can be positive, negative, or zero. For the
+figure, we set the limits of $q$ and $t$ to completely cover the
+limits of our plot. Of course, only values of $\vec{k}$ that actually
+fall within the Brillouin zone will describe unique states. If
+desired, this condition can be met by checking that:
+
+\begin{eqnarray}
+|k_x| & \leq & \frac{2}{3}\frac{\pi}{a} \\
+\frac{1}{\sqrt{3}}|k_x| + |k_y| & \leq & \frac{4}{3\sqrt{3}}\frac{\pi}{a}
+\end{eqnarray}
+
+The ($n$,$m$) = (5,2) nanotube described in Figure \ref{five_two} is
+metallic. Figure \ref{five_three} describes a (5,3) nanotube, which is
+a semiconductor since the valence and conduction subbands never touch.
+
+\begin{figure}[ht]
+\center\includegraphics[width=\textwidth]{graphene_bands_fig4.png}
+\caption{{\small Allowed $\vec{k}$ vectors for a (5,3)
+nanotube. Because the $\vec{K}$ and $\vec{K}^\prime$ points are not
+included among the allowed $\vec{k}$'s, this nanotube is expected to
+be a semiconductor. Note that the band-edge states are still close to
+the $\vec{K}$ and $\vec{K}^\prime$ points, and that the nanotube is a
+direct bandgap semiconductor since the conduction subband minimum and
+valence subband maximum occur at the same value of $\vec{k}$.}}
+\label{five_three}
+\end{figure}
+
+There are several ways to plot the dispersion of the subbands along
+the nanotube axis. In Figure \ref{subbands}, the energy of the various
+subbands versus axial wavevector $t$ is shown for the (5,2) and (5,3)
+examples. Looking carefully at the metallic (5,2) case, there are {\em
+two} unique subbands that are partially filled at the Fermi energy
+(remember $E_\mathrm{F}=0$ here) ... for some value of $E$ close to
+zero, each of these subbands intersects $E$ twice (once for $t>0$ and
+once for $t<0$, corresponding to states propagating forwards and
+backwards along the tube axis) leading to a total of four states with
+$E=E_\mathrm{F}$. A similar situation is found in the semiconducting
+tube: there are two distinct conduction band minima and two distinct
+valence band maxima within the Brillouin zone, so if $E_\mathrm{F}$ is
+brought close to $E_\mathrm{C}$ or $E_\mathrm{V}$, there will always
+be two subbands that are equally populated with carriers. Thus, in the
+strictest sense, carbon nanotubes are not one-dimensional electronic
+systems since there are always at least two 1-D subbands that
+participate! Nonetheless, the reduced dimensionality versus bulk
+graphite is keenly evidenced in their electronic properties.
+
+\begin{figure}
+\center\includegraphics[width=5.5in]{graphene_bands_fig5.png}
+\caption{{\small Dispersion $E$ versus $t$ for the (5,2) and (5,3)
+nanotubes discussed above. The different subbands are all plotted on
+the same axes, with portions of the subbands that fall within the
+Brillouin zone marked by thicker lines.}}
+\label{subbands}
+\end{figure}
+
+
+
+\bibliography{chem719}
+\bibliographystyle{cv.bst}
+
+
+
+\end{document}
