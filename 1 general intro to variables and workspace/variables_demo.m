@@ -104,6 +104,7 @@ sin([0 1 2 3 4 5 6 7 8]*pi()/4)  % takes the sin of each value
 [0:2:8]  % increment by 2 from the initial to the final value
 [0:-2:-10] % increment can be negative
 [0:8]'   % if you wanted a column vector
+sum(1:100) % add up numbers 1 thru 100
 
 % linspace command automatically generates a series of evenly spaced values
 linspace(0,10,11) % generate 11 values evenly spaced between 0 and 10
@@ -148,7 +149,7 @@ results=[4 5.5 6 7] > [4.4 5 6 8]
 % the context of image data, which is frequently defined as a matrix of
 % unsigned integer values (type uint8: 0 to 255 or uint16: 0 to 65535
 test=[-4 4 5.2 6 7]  % will create test as a vector of doubles
-test2=uint8(test)  % this will cast test as unsigned 8-bit integer 
+test2=uint8(test)  % this will "cast" test as unsigned 8-bit integer 
 
 % In many cases you can cast one type as another, sometimes necessary:
 results=[4 5.5 6 7] > [4.4 5 6 8] 
@@ -296,36 +297,5 @@ clear global moving
 % clear all % would clear an even larger number of data types
 % check 'doc clear' for more info
 
-%%%%%%%%%%%%%%%%%
-% EXERCISE: van der Waals calculator
-%
-% The van der Waals equation of state can predict the pressure of a gas (in
-% atm) based on the volume (in Liters), number of moles, and temperature
-% (in K), with the gas constant R (=0.0821 L-atm/(mol-K)), and two
-% gas-specific parameters a (in atm-L^2/mol^2) and b (in L/mol) as
-% parameters.
-%
-% First, write a script that defines V, T, n, R, a, and b as scalar
-% variables (type double), and then write an expression to find the
-% pressure p in terms of them. Display p with disp(p). Make sure it gives
-% the value you expect for the ideal gas when a=0 and b=0. Then look up
-% values of a and b for N2 and for CO2, and put these as options at the top
-% of the script (so a user can un-comment the appropriate a and b for the
-% gas they are interested in).
-%
-% Then, modify it so that V is defined as a row vector of volumes from some
-% low to high limit, using linspace. Modify your expression for p, as
-% needed, to do element-wise math so that p ends up as a vector of
-% pressures corresponding to each volume. Also calculate a vector of molar
-% volumes Vm.
-%
-% Hint: Vm=V/n; % if you take an array and add, subtract, multiply or
-% divide by a scalar value, Matlab will automatically do it elementwise.
-% However, where an array appears in the denominator, or is taken to an
-% exponent, you need to explicitly say you want it to an element-wise
-% calculation. For the ideal gas you would have
-% p=R*n*T./V;
-
-% Next: make a plot of p versus V, or Vm. The 'plot' command goes plot(x,y): 
-% plot(Vm,p)
-% We will look more at plots in the next unit.
+% Check out the exercise for calculating the pressure of a van der Waals
+% gas in this folder.

@@ -25,8 +25,8 @@ R=8.20574e-2; % L-atm / mol-K
 % uncomment the gas you wish to plot
 
 % CO2
-% a = 3.610; % (atm-L^2)/mol^2
-% b = 4.29e-2; % L/mol
+a = 3.610; % (atm-L^2)/mol^2
+b = 4.29e-2; % L/mol
 
 % C2H2
 % a = 4.55; % (atm-L^2)/mol^2

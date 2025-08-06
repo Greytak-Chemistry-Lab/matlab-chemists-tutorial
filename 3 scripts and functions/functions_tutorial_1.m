@@ -40,12 +40,13 @@ clear all  % this will clear both
 % hello_world
 % run hello_world
 
-% Here's how you would run a script that's not in your path:
+% Here's how you would run a script that's not in your path (modify for
+% your computer!):
 % run 'C:\Users\andrew\Documents\aaa_svn\matlab-sandbox\andrew\tutorial\3 scripts and functions\hello_world.m'
 
 % When you run the above, you should see:
 % - a text announcement in the command window
-% - two variables, and integer 'cat_paws' and a random number called
+% - two variables: an integer 'cat_paws' and a random number called
 % 'a_random_number' show up in your Workspace
 
 % The commands in the script run in your Workspace: all the variables you
@@ -92,9 +93,9 @@ clear all  % this will clear both
 
 % This demo function converts a photon wavelength (in vacuum) in nm to the
 % corresponding photon energy in electron-volts. Try it:
-% ev_demo(500)  % returns about 2.48 (eV)
+ev_demo(500)  % returns about 2.48 (eV)
 % ev_demo(600)
-% ev_demo([500 600])
+% ev_demo([500 600]) % will return energy for each wavelength
  
 % Now take a look at the code. The expression to do this
 % is E=h*c/lambda but we need to be mindful of units. Also, note that the
@@ -216,11 +217,11 @@ a=[1:5].^2
 a=[5:5:20].^2
 a=[4:-1:-4]
 a=[4:-1:-4].^2
-x=linspace(0,2*pi(),100)
+x=linspace(0,2*pi(),100);
 plot(x,sin(x))
 
 % but sometimes you want more control, and a for statement is needed
-x=linspace(-1,1,100)
+x=linspace(-1,1,100);
 figure(1);clf
 for(a=0:4)
     plot(x,x.^a)
@@ -278,8 +279,10 @@ switch a
         disp('guess again')
 end
 
-% even more useful with strings
+%% even more useful with strings
 element='hydrogen';
+% element='helium';
+% element='gold';
 switch element
     case 'hydrogen'
         disp('Element 1')
@@ -373,7 +376,7 @@ x_max=max(x)
 % check
 x(xmax_idx)
 
-% You can make your own functions do this using varargin and varargout
+%% You can make your own functions do this using varargin and varargout
 % I started to set up an example with varargin in photon_energy.m, where
 % the user will be able to choose whether it should output the photon
 % energy in eV or in wavenumbers (wave per cm, cm^-1) for an input
