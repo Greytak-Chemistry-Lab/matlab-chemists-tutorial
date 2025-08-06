@@ -1,4 +1,10 @@
 % Exercise for plotting in Matlab: isotherms and adiabats -- solved
+%
+% Plot lines of pressure versus volume for an ideal gas sample at constant
+% temperature (isotherms) and constant entropy (adiabats, following
+% adiabatic compression/expansion). Adiabatic compression shows a steeper
+% rise in pressure as the volume is decreased. Lines are prepared for a
+% series of initial temperatures at some common starting volume.
 
 %% constants
 % Here are some constants I frequently use. The only one we actually need
