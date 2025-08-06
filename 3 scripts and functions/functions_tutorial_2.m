@@ -39,23 +39,23 @@ clear all  % this will clear both
 % function definition. The input variable(s) are just placeholders: they do
 % not need to exist in your workspace and won't be created there when you
 % create or use the function handle:
-% squared_f=@(x) x^2;
-% squared_f(5) % should give 25
+squared_f=@(x) x^2;
+squared_f(5) % should give 25
 % squared_f=@(x) x.^2; % probably better, works for array inputs
 
-% You can use variables from your workspace that ARE NOT listed as inputs
+%% You can use variables from your workspace that ARE NOT listed as inputs
 % to the anonymous function in the definition. Their current values will be
 % baked into the function handle: its behavior will not change even if you
 % later change the value of these parameters.
-% a=2;
-% powerlaw_f=@(x) x^a;
-% powerlaw_f(5) % should give 25
+a=2;
+powerlaw_f=@(x) x^a;
+powerlaw_f(5) % should give 25
 % a=3;
 % powerlaw_f(5) % try it now
 % powerlaw_f=@(x) x^a;
 % powerlaw_f(5) % try it now
 
-% If you need to pass multiple variables to an anonymous fucntions, you can
+%% If you need to pass multiple variables to an anonymous functions, you can
 % either use a vector input, or put list multiple variables as inputs
 % powerlaw_f = @(x) x(1)^x(2);  % will work for two scalars
 % powerlaw_f([5 2]) % should give 25
@@ -91,17 +91,18 @@ my_celtics_championships(2024)
 % definition must end with an 'end' statement. This is not required in .m
 % files defining a single function.
 
-% local functions CANNOT see variables in the workspace of the main
+%% local functions CANNOT see variables in the workspace of the main
 % function or script: just like functions defined in a separate file they
 % typically only know what is passed to them.
 my_powerlaw([1:4],4) % raise a series of numbers to some power
 
 % using a local function in a .m file you've made can make your scripts
 % easier to read, and can reduce the dependency of your code on other
-% functions. For example, matlab-abs-emis has a Simpson's rule integration
-% function for general use, but in some other cases where I wish to use
-% Simpson's rule integration to calculate a peak area etc, I copy the code
-% into a local function local_simpson that I'm sure will be available.
+% functions. For example, the Greytak lab toolbox "matlab-abs-emis" has a
+% Simpson's rule integration function for general use, but in some other
+% cases where I wish to use Simpson's rule integration to calculate a peak
+% area etc, I copy the code into a local function local_simpson that I'm
+% sure will be available.
 
 %% variable scope
 % A variable's scope means the range of code from which it is visible.
@@ -121,25 +122,25 @@ assign_h('J-s')
 % Check out the .m file to see how it works. Try making it also assign
 % Boltzmann's constant kB in the matching energy units.
 
-% You can use global variables to share data among different functions. The
-% variable must be declared as global before you use it in each function or
-% script where it appears. Global variables should be used rarely, but can
-% be useful for timing flags, and for keeping track of "objects" associated
-% with ActiveX controls, data acquisition, etc.
+%% You can use global variables to share data among different functions. 
+% The variable must be declared as global before you use it in each
+% function or script where it appears. Global variables should be used
+% rarely, but can be useful for timing flags, and for keeping track of
+% "objects" associated with ActiveX controls, data acquisition, etc.
 
 % Uncomment the following code and run this cell. The use of a function
 % handle here will let us call my_powerlaw_global from the command line,
 % even though we can't normally do that with a local function defined in a
 % script:
-% global b;
-% b=2;
-% powerlaw_f=@my_powerlaw_global;
+global b;
+b=2;
+powerlaw_f=@my_powerlaw_global;
 
-% Now run the following things (via the command line or select-and-run):
-% powerlaw_f([2:5]) % will give squares with global variable b=2
-% update value of b and try again 
-% b=3;
-% powerlaw_f([2:5]) % should give cubes
+%% Now run the following things (via the command line or select-and-run):
+powerlaw_f([2:5]) % will give squares with global variable b=2
+update value of b and try again 
+b=3;
+powerlaw_f([2:5]) % should give cubes
 
 % This is a neat demo, but also illustrates the problem with global
 % variables: they could change without warning if you reuse the name in
@@ -180,17 +181,17 @@ peakval=max_quadratic(a,b,c)
 % once you've fixed max_quadratic, try calling it with different values of
 % a, b and c so you can see it works
 
-% Now an example where we get a function handle for a function that
-% calculates y for any value of x, using a quadratic function built from
-% the input arguments:
+%% Now an example where we get a function handle returned to us 
+% get_quadratic will build you a function that calculates y for any value
+% of x, using the input arguments as the coefficients:
 a=-1;
 b=-1;
 c=0;
 qf=get_quadratic(a,b,c)
-% This function is already built for you and should work, but open the code
+% This function is already built for you and should work. Open the code
 % to see what it is doing.
 
-
+%% Trying out the function handle we got from get_quadratic
 qf(1) % should give value of y = a*x^2 + b*x + c when x=1
 qf(2) % should give value of y = a*x^2 + b*x + c when x=1
 a=2;
