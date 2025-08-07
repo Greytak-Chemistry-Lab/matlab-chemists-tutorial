@@ -158,7 +158,7 @@ sin(double(results)) % succeeds
 
 % Strings are arrays of type 'char' (character)
 name='Andrew'
-class name % 'class' command will return the variable type
+class(name) % 'class' command called this way will return the variable type
 
 % There are many more complex data types, such as structures, function
 % handles, and objects. Struct's have several fields, identified by field
