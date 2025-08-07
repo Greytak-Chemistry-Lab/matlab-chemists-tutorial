@@ -169,6 +169,8 @@ h1=imshow(truecolor_image);
 h1=imshow(truecolor_image,'XData',[0 40],'YData',[0 30]); % other way
 % Now, the Data Tips will show the [X,Y] position in microns instead of
 % pixels.
+xlabel('Microns')
+ylabel('Microns')
 
 % If you want to see the axes, you still have to make them visible:
 set(gca,'Visible','on')
@@ -242,8 +244,10 @@ colorbar
 % The field of view in this image happens to be 1652 nm across and 1115 nm
 % high. We can add axes for distance.
 clf
+% imshow(gray_image,'XData',[0 1652],'YData',[0 1115])
 imshow(gray_image,255*stretchlim(gray_image),'XData',[0 1652],'YData',[0 1115])
 set(gca,'Visible','on')
+xlabel('Nanometers')
 colorbar
 
 %% Look-up tables (LUT's)
@@ -257,7 +261,8 @@ colorbar
 % Try different colormaps: You can pick them with Edit->Colormap from the
 % Figure menu. You can also pick some built-in ones by name: try 'hot',
 % 'jet', 'cool': default grayscale is of course 'gray'
-colormap('jet')
+% colormap('jet')
+colormap('hot')
 
 % The image data itself and the XData and YData scales are part of the
 % Image object, while the colormap and color scale limits are properties of
