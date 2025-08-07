@@ -1,4 +1,4 @@
-% For analysis of fluorescent images -- demo updated 2024-07-22
+% For analysis of fluorescent images -- demo updated 2025-08-06
 
 
 %% setup
@@ -81,6 +81,7 @@ if(exist('roix','var') && length(roix)>2)
 end
 
 %% Pick crop area
+figure(1) % brings figure 1 to front
 cropx = [];
 cropy = [];
 croprect=imrect; % NOTE: imrect is now discouraged, Rectangle() is preferred
@@ -121,6 +122,7 @@ if(exist('cropx','var') && length(cropx)>1)
     end
 end
 %% Pick ROI
+figure(1) % brings figure 1 to front
 myroi = true(size(red)); % initialize all-on, pick subregion only if we want
 roix = [];
 roiy = [];
@@ -218,6 +220,8 @@ figure(6)
 plot([particles.red_total],[particles.green_total],'ks')
 xlim([0 max(xlim)])
 ylim([0 max(ylim)])
+xlabel('Red total')
+ylabel('Green total')
 
 % histogram of particle properties learn more about Matlab's 'histogram'
 % and related functions from the documentation. Enclosing [particles.area]
@@ -225,3 +229,5 @@ ylim([0 max(ylim)])
 % element of the 'particles' structure array to the histogram function.
 figure(7) 
 histogram([particles.area],[0:1000:11000])
+xlabel('Particle area')
+ylabel('Number found')

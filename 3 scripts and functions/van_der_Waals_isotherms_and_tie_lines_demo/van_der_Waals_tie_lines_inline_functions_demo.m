@@ -1,12 +1,12 @@
 %% Find 'tie lines' for liquid-gas phase transitions van der Waals equation of state
 % an example using anonymous function handles
 %
-% note there are some things in here that could be done more efficiently in
+% Note there are some things in here that could be done more efficiently in
 % other ways: for example, I use for loops in some places where I could use
 % element-wise notation to calculate things for a series of volumes, etc.
 % I am a chemist, not a programmer! It's OK to have inefficient code if it
 % lets you get what you want, faster. I'm rather proud of how I detect
-% the range of volumes corresponding to the phase transition though.
+% the range of volumes corresponding to the phase transition though. -ABG
 
 clear
 
@@ -37,8 +37,8 @@ b = 4.29e-2; % L/mol
 % b = 3.87e-2; % L/mol
 
 % H2O
-a=5.464; % (atm-L^2)/mol^2
-b=3.05e-2; % L/mol
+% a=5.464; % (atm-L^2)/mol^2
+% b=3.05e-2; % L/mol
 
 % ideal
 % a = 0;
@@ -160,9 +160,11 @@ for(j=1:length(T_rs))
             p_tie=0;
         end
         % using some logic to detect the volumes at the end of the tie
-        % line: as the volume increases from zero, the low-volume end is        % the first place where the vdW pressure goes from being above the
-        % tie line pressure to below it. The high-volume end is the second
-        % place that happens.
+        % line: as the volume increases from zero, the low-volume end of
+        % the tie line is the first place where the vdW pressure goes from
+        % being above p_tie pressure to below it (difference goes from
+        % positive to negative). The high-volume end is the second place
+        % that happens.
         Vm_tie=find(diff(isotherm_r-p_tie>0)<0);
         % set all pressures in the phase transition region to the constant
         % tie line pressure (vapor pressure at this temperature)

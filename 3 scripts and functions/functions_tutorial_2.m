@@ -138,7 +138,7 @@ powerlaw_f=@my_powerlaw_global;
 
 %% Now run the following things (via the command line or select-and-run):
 powerlaw_f([2:5]) % will give squares with global variable b=2
-update value of b and try again 
+% update value of b and try again 
 b=3;
 powerlaw_f([2:5]) % should give cubes
 

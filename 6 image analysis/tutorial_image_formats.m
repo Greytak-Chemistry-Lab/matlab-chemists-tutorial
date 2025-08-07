@@ -80,7 +80,7 @@
 % JPEG (.jpg): True color images, with *image compression* (a Fourier
 % transform based algorithm that results in some loss of spatial
 % resolution, but can give much smaller file sizes for large images with
-% lots of colors such as typical photgraphs). Intensity values are almost
+% lots of colors such as typical photographs). Intensity values are almost
 % always sRGB encoded.
 
 % "Camera Raw" (.CR2): "Raw" image format saved by Canon digital cameras;
@@ -88,7 +88,9 @@
 
 % As a scientist, you will use many other tools as well, and if you do not
 % already have Image-J (a free Java program distributed by NIH, also
-% re-packaged as "FIJI") installed, you should get it now!
+% re-packaged as "FIJI") installed, you should get it now! Consider also
+% installing GIMP, an open-source, Photoshop-like tool. (You don't need
+% either of them for this tutorial).
 
 % This tutorial gives some examples of different image types, how to define
 % colormaps and X and Y scales for images, and how to select regions of
@@ -115,8 +117,9 @@ builtin_image=imread('yellowlily.jpg');
 % You can see the image is a 3-dimensional matrix of type uint8 (unsigned
 % 8-bit integer: each element can take an integer value 0-255)
 
+%% 'image' command
 % There are several ways to display images in Matlab. The most basic is the
-% 'image' command (doesn't require IPT):
+% 'image' command (doesn't require Image Processing Toolbox):
 h1=image(builtin_image)
 
 % This produces a figure showing the image data, and returns a handle to
@@ -127,18 +130,20 @@ h1=image(builtin_image)
 % but it does not ensure the same scale for the x and y axis, so the
 % picture may appear distorted.
 
-% A better option is 'imshow' in the IPT. By default it shows the image
-% with 'axis equal' enabled, and the axis labels suppressed, though you can
-% change this and it accepts many optional arguments. (doc imshow for more)
-% Still returns an Image object.
-% h1=imshow(builtin_image)
+%% A better option is 'imshow' in the IPT. 
+% By default, 'imshow' displays the image with 'axis equal' enabled, and
+% the axis labels suppressed, though you can change this and it accepts
+% many optional arguments. (doc imshow for more) Still returns an Image
+% object.
+h1=imshow(builtin_image)
 
-% Sometimes you might not need to actually save the image data to your
+%% Sometimes you might not need to actually save the image data to your
 % workspace: just pass it from imread to imshow:
 imshow(imread('car2.jpg'))
 
-% Now let's load a custom example: fluorescently labeled silica
-% microspheres imaged through a widefield fluorescence microscope
+%% Now let's load a custom example: 
+% Here are fluorescently labeled silica microspheres imaged through a
+% widefield fluorescence microscope (from John Lavigne lab, USC)
 truecolor_image=imread(fullfile('fluorescence','1-1-2s-1.jpg'));
 
 % You can see in the workspace that this image is a true-color image, with
@@ -147,6 +152,7 @@ truecolor_image=imread(fullfile('fluorescence','1-1-2s-1.jpg'));
 clf
 h1=imshow(truecolor_image);
 
+%% Indicating a scale
 % Usually, the X and Y scales in an image are just the pixel number (you
 % can use 'Data Tips' tool from the Figure toolbar -> Tools menu to see the
 % RGB values at any pixel position), and the axis labels are not shown to
@@ -214,16 +220,17 @@ gray_image=imread(fullfile('sem','JB1-13e_crop.tif'));
 % limits at 0 and 255. You can check values with the Data Tips.
 imshow(gray_image)
 
-% But you can enter lower and upper limits. 
+%% But you can enter lower and upper limits. 
 imshow(gray_image,[100 200])
 
-% if you give an empty matrix for the limits, it auto-scales to the lowest
-% and highest pixel. 
+%% if you give an empty matrix for the limits, it auto-scales 
+% to the lowest and highest pixel.
 imshow(gray_image,[])
 
 % Add a color scale
 colorbar
 
+%% stretchlim
 % However, auto-scaling can be distorted by a single unusually bright or
 % dark pixel. 'stretchlim' can find the 1st and 99th percentile values, but
 % it returns them as a fraction of full-scale. Can you figure out how to
@@ -231,6 +238,7 @@ colorbar
 imshow(gray_image,255*stretchlim(gray_image))
 colorbar
 
+%% Add scale
 % The field of view in this image happens to be 1652 nm across and 1115 nm
 % high. We can add axes for distance.
 clf
@@ -238,6 +246,7 @@ imshow(gray_image,255*stretchlim(gray_image),'XData',[0 1652],'YData',[0 1115])
 set(gca,'Visible','on')
 colorbar
 
+%% Look-up tables (LUT's)
 % You might decide that a "false" color scale will help bring out contrast,
 % or for some kinds of data. Matlab does this by using colormaps: color
 % lookup tables defined as a 3-column matrix of RGB values (from 0 to 1):
@@ -246,16 +255,17 @@ colorbar
 % own.
 
 % Try different colormaps: You can pick them with Edit->Colormap from the
-% Figure menu. You can also pick built-in ones by name: try 'hot', 'jet',
-% 'cool': default grayscale is of course 'gray'
-% colormap('jet')
+% Figure menu. You can also pick some built-in ones by name: try 'hot',
+% 'jet', 'cool': default grayscale is of course 'gray'
+colormap('jet')
 
 % The image data itself and the XData and YData scales are part of the
 % Image object, while the colormap and color scale limits are properties of
 % the axes that they are displayed on:
-ax2=axes;
-ax2.CLim
-
+ax2=gca; % gca = "get current axes handle"
+% display CLim property (data values corresponding to low and high end of
+% colormap)
+ax2.CLim  
 %% create a colormap
 % any nx3 matrix can be a colormap. Here's a simple colormap where the
 % lowest value is black ([0 0 0]) and the highest is pure red ([1 0 0])
@@ -267,18 +277,25 @@ colormap(redmap)  % use quotes to specify the names of builtin maps: no quotes h
 % sometimes it is helpful to split out the channels of a true color image
 % to analyze them separately: see if you can create 3 separate 2-D matrices
 % with the red, green, and blue data from our true color image. Then make
-% four plots: (fill in what is missing to make this happen)
+% four plots: 
 
 figure(1);clf 
 imshow(truecolor_image,'XData',[0 40],'YData',[0 30])
+
+% now get the different color channels each as a 2D matrix:
+red=truecolor_image(:,:,1); % channel 1 = red
+% green=truecolor_image(:,:,1); % channel 1 = red
+% blue=truecolor_image(:,:,1); % channel 1 = red
 
 figure(2);clf
 imshow(red,255*stretchlim(red,[0.01 0.999]),'XData',[0 40],'YData',[0 30])
 colormap(redmap)
 colorbar
 
+% you can repeat this for the other channels
 
-% you can save a grayscale or indexed-color image in a .PNG file:
+
+%% you can save a grayscale or indexed-color image in a .PNG file:
 imwrite(red,'red.png')
 
 % note that if you open that file in Windows, it looks gray, because you
@@ -290,7 +307,7 @@ imwrite(red,redmap,'red.png')
 
 
 
-%% Selecting regions of interest
+%% Selecting regions of interest automatically by threshold
 % You may want to know about the data within a particular region of
 % interest. It is easy to do this by logical addressing -- selecting data
 % using a logical array the same time as your image, with 1's at the
@@ -309,7 +326,7 @@ imshow(mymask)
 
 redavg=mean(red(mymask))
 
-%% selecting regions of interest
+%% selecting regions of interest manually
 % There are also a number of interactive tools that can be used to draw
 % shapes and create regions of interest based on them.
 
@@ -347,12 +364,19 @@ my_line=drawline()
 % anchor points. The Position property be a 2-column matrix: 1st column x
 % values, 2nd column y values, according to the XData abnd YData scales you
 % set for the image, or in pixels if you did not set these. 
-% disp(my_line.Position)  % view Position
-% Calculate length of the line
-% sqrt( diff(my_line.Position(:,1))^2 + diff(my_line.Position(:,2))^2)
+disp(my_line.Position)  % view Position
+% Calculate length of the line 
+sqrt( diff(my_line.Position(:,1))^2 + diff(my_line.Position(:,2))^2)
 
 % Check the distance between some particles. Check the distance between the
 % two lines of assembled particles in the SEM image we looked at before.
+
+%% delete annotation
+my_line.delete  
+
+% note the variable continues to exist in the workspace even though the
+% line object is deleted from the figure. You can remove the variable with
+% 'clear' if desired, or re-create the line by using 'drawline' again.
 
 %% Overview of additional image analysis tutorials and examples
 
