@@ -13,3 +13,5 @@ Copyright 2025 Andrew Greytak
 University of South Carolina
 
 Email: greytak@sc.edu
+
+PS: Please note that no guarantee is made of the functionality or correctness of any part of the code included here. 
