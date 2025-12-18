@@ -247,6 +247,13 @@ find(scores==0)
 c>4  % gives a logical array the same size as c
 find(c>4) % but this only gives the linear index values
 
+% If you just want to determine if there are any elements that aren't zero, you
+% can use the 'any' command. It will produce a logical 1 (true) or 0 (false) if 
+% there are any non-zero elements.
+% try:
+any(scores)
+any(scores>90)
+
 % All elements in an array have to have the same data type. You can make an
 % array of structs, but they all have to have the same field names and in
 % the same order:
