@@ -46,6 +46,7 @@ b = 4.29e-2; % L/mol
 
 %% Figure 1 -- plot pressure vs molar volume for a series of temps
 Temps=[0:40:400]+273;
+Temps=Temps(end-4:end);
 % Temps=120;
 Vols=10.^[-3:0.01:2]; % actually molar volumes
 isotherm=zeros(length(Vols),length(Temps));
@@ -109,6 +110,7 @@ hold on;
 figure(2);clf
 clear isotherm_r
 T_rs=[ 0.4529 0.6:0.1:1.1]; % series of relative temperatures
+T_rs=T_rs(3:end);
 Vols_r=10.^[-0.47:0.01:3.0]; % logarithmic series of relative molar volumes
 isotherm_rs=zeros(length(Vols_r),length(T_rs));
 isotherm_rs_corrected=isotherm_rs;
