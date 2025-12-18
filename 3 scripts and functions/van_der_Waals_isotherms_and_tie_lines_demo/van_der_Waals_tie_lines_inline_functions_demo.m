@@ -46,7 +46,7 @@ b = 4.29e-2; % L/mol
 
 %% Figure 1 -- plot pressure vs molar volume for a series of temps
 Temps=[0:40:400]+273;
-Temps=Temps(end-4:end);
+% Temps=Temps(end-4:end); % if you want to try a limited set 
 % Temps=120;
 Vols=10.^[-3:0.01:2]; % actually molar volumes
 isotherm=zeros(length(Vols),length(Temps));
@@ -109,8 +109,10 @@ hold on;
 % Then, we can scale the results back for our specific gas of interest.
 figure(2);clf
 clear isotherm_r
-T_rs=[ 0.4529 0.6:0.1:1.1]; % series of relative temperatures
-T_rs=T_rs(3:end);
+% series of relative temperatures: lowest happens to produce tie line at
+% p=1 atm for CO2 when scaled to real values, below
+T_rs=[ 0.4529 0.6:0.1:1.1]; 
+T_rs=T_rs(1:end);
 Vols_r=10.^[-0.47:0.01:3.0]; % logarithmic series of relative molar volumes
 isotherm_rs=zeros(length(Vols_r),length(T_rs));
 isotherm_rs_corrected=isotherm_rs;
@@ -150,7 +152,7 @@ for(j=1:length(T_rs))
         % pressure selected as the phase transition pressure. Then we just
         % have to figure out the best pressure so this function handle
         % returns zero.
-        work_error_f=@(p) local_simpson(Vols_r(find(diff(isotherm_r-p>0)<0,1):find(diff(isotherm_r-p>0)<0,1,'last')), ...
+        work_error_f=@(p) local_trap_integral(Vols_r(find(diff(isotherm_r-p>0)<0,1):find(diff(isotherm_r-p>0)<0,1,'last')), ...
             -(isotherm_r(find(diff(isotherm_r-p>0)<0,1):find(diff(isotherm_r-p>0)<0,1,'last'))-p) );
         % fzero is a Matlab built-in function that will find the value of x
         % where any function crosses zero. You give it a function handle
@@ -205,14 +207,17 @@ ylabel('p/atm')
 xlabel('V_m / (L/mol)')
 
 %% local function definition(s)
-function a=local_simpson(x,y)
-% Simpsons rule integration of y with respect to x
+function a=local_trap_integral(x,y)
+% Trapezoidal rule integration of y with respect to x
 %
-% Simpson's rule is the area under a linearly interpolated curve and is a
-% good approach for integration of discrete data.
-% A=SIMPSON(X,Y)
-% Returns Simpson's rule integral of Y(X)dX
-% See also qyplot
+% The trapzeoidal rule gives the area under a linearly interpolated curve
+% and is a good approach for integration of discrete data. If we defined
+% this in a separate function .m file we could have a help block like this:
+% A=trap_integral(X,Y)
+% Returns trapezoidal rule integral of Y(X)dX
+% Note that Andrew learned this as "Simpson's rule" in school and some of
+% his code calls it that, even though Simpson's rule is a more
+% sophisticated method.
 
 x=reshape(x,length(x),1);
 y=reshape(y,length(y),1);
