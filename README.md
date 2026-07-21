@@ -1,5 +1,5 @@
 # matlab-chemists-tutorial
-This respository houses example code for a Matlab tutorial in development at the University of South Carolina based on work by Andrew Greytak and Morgan Stefik.
+This repository houses example code for a Matlab tutorial in development at the University of South Carolina based on work by Andrew Greytak and Morgan Stefik.
 
 The code has been primarily tested with Matlab version R2022b.
 

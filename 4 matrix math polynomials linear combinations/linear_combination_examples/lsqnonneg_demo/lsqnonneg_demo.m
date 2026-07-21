@@ -35,12 +35,16 @@ w3=f3-p*f2;
 A=[w1 w2 w3];
 
 % fit fake data with matrix division
-x_fit=A\y_fake;
-fitstring=['x=[' num2str(x_fit(1),2) ' ' num2str(x_fit(2),2) ' ' num2str(x_fit(3),2) ']'];
+% x_fit=A\y_fake;
+% fitstring=['x=[' num2str(x_fit(1),2) ' ' num2str(x_fit(2),2) ' ' num2str(x_fit(3),2) ']'];
 
 % fit fake data with lsqnonneg: insists on positive coefficients
 % x_fit=lsqnonneg(A,y_fake);
 % fitstring=['x=[' num2str(x_fit(1),2) ' ' num2str(x_fit(2),2) ' ' num2str(x_fit(3),2) ']'];
+
+% fit fake data with linsolve
+x_fit=linsolve(A,y_fake);
+fitstring=['x=[' num2str(x_fit(1),2) ' ' num2str(x_fit(2),2) ' ' num2str(x_fit(3),2) ']'];
 
 disp(norm(y_fake-A*x_fit))
 
