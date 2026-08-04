@@ -17,7 +17,7 @@ This tutorial is a work in progress: some parts may be incomplete. While you can
 > 
 > Copyright Andrew B Greytak with applicable rights reserved by the University of South Carolina. Email: `greytak@sc.edu`.
 > 
-> Code in this project represents a tutorial, not completed software. It is distributed via the CC-SA-BY-4.0 license: Any copies or derivative works that you distribute must be likewise made available.
+> Code in this project represents a tutorial, not completed software. It is distributed via the CC-BY-SA-4.0 license: Any copies or derivative works that you distribute must be likewise made available.
 >
 > See `LICENSE.md` file for details.
 >
