@@ -1,6 +1,12 @@
 % variables in Matlab: types and arrays
 %
 % A script template for the Greytak lab's Matlab tutorial
+%
+% Attribution: Greytak Chemistry Laboratory - University of South Carolina
+% Copyright Andrew B Greytak 2025 with applicable rights reserved by USC
+% github.com/greytak-chemistry-lab/matlab-chemists-tutorial
+% See matlab-chemists-tutorial/LICENSE.md file for license info
+
 
 % Matlab is a computer interface for mathematical calculations (especially
 % matrix math and related discrete mathematics), a plotting program, and a
