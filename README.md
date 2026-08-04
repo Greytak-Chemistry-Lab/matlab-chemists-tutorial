@@ -3,7 +3,7 @@ This repository houses example code for a Matlab tutorial in development at the 
 
 The code has been primarily tested with Matlab version R2022b.
 
-## project organization
+## Project organization
 
 There are presently 6 tutorial units. The "tutorial" .m file(s) in each unit are intended as a hands-on introduction to key commands and concepts. Exercises have code that is intentionally either incomplete or absent so you can try coming up with something that works. Some examples have accompanying "solved" versions. Demos are functioning examples that are meant to be interesting and may go into much more detail, more advanced Matlab tools, or specialized chemistry and physics topics.
 
